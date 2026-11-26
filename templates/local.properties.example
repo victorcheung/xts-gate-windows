@@ -1,0 +1,5 @@
+# WSL/Linux gate build
+sdk.dir=/root/ohos-gate/sdk
+
+# nodejs.dir is optional; gate compile_app.py writes it. For manual builds:
+# nodejs.dir=/root/ohos-gate/toolchain/node-v18.20.1-linux-x64

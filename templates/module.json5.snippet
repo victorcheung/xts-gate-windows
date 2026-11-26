@@ -1,0 +1,33 @@
+// Put this inside "module" in the correct module.json5:
+//   dynamic: entry/src/ohosTest/module.json5
+//   static : entry/src/main/module.json5
+//
+// Do NOT put "process" under extensionAbilities.
+// Use extensionProcessMode when the extension must run in its own process:
+//   bundle   - same process as the app
+//   type     - extensions of the same type share a process
+//   instance - one process per extension instance (usually what kill-by-pid tests need)
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "extensionAbilities": [
+      {
+        "name": "<ExtAbility>",
+        "srcEntry": "./ets/<path>/<ExtAbility>.ets",
+        "type": "service",
+        "exported": true,
+        "extensionProcessMode": "instance"
+      }
+    ],
+    "requestPermissions": []
+  }
+}
+
+// syscap.json (same directory as module.json5, or ohosTest for dynamic):
+// {
+//   "devices": {
+//     "general": [],
+//     "custom": [{ "xts": ["SystemCapability.Ability.AbilityRuntime.Core"] }]
+//   }
+// }

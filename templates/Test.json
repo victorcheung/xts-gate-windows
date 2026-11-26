@@ -1,0 +1,28 @@
+{
+  "description": "Configuration for <suite> Tests",
+  "driver": {
+    "type": "OHJSUnitTest",
+    "test-timeout": "600000",
+    "bundle-name": "<bundleName>",
+    "module-name": "<entry_test | entry>",
+    "shell-timeout": "600000",
+    "testcase-timeout": "30000"
+  },
+  "kits": [
+    {
+      "test-file-name": [
+        "<hap_name>.hap"
+      ],
+      "type": "AppInstallKit",
+      "cleanup-apps": true
+    },
+    {
+      "type": "ShellKit",
+      "run-command": [
+        "power-shell wakeup",
+        "power-shell timeout -o 86400000",
+        "power-shell setmode 602"
+      ]
+    }
+  ]
+}

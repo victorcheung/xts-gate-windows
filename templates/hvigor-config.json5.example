@@ -1,0 +1,7 @@
+{
+  "modelVersion": "26.0.0",   // gate dynamic + static 7.26.0; legacy local hvigor 5.14.2 uses "6.1.1"
+  "dependencies": {},
+  "properties": {
+    "ohos.byteCodeHar.integratedOptimization": true
+  }
+}

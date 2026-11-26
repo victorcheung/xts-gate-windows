@@ -1,0 +1,14 @@
+# Copy to <suite>/BUILD.gn and replace <...>.
+# Static (ArkTS-Sta / arkTSVersion 1.2) suite.
+# test_hap MUST stay commented: static suites have no ohosTest target.
+
+import("//test/xts/tools/build/suite.gni")
+
+ohos_js_app_static_suite("<Target>") {
+  # test_hap = true
+  testonly = true
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "Acts<SuiteName>StaticTest"
+  part_name = "<part_name>"
+  subsystem_name = "<subsystem_name>"
+}
