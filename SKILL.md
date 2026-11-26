@@ -13,6 +13,16 @@ description: Use when building OpenHarmony XTS test suites on a Windows host thr
 
 本 skill 只负责准备与本地验证，**不执行 git commit/push，也不提交 PR**；提交由你们按仓的流程完成。
 
+## 硬性禁令（先读，任何理由都不例外）
+
+- **禁止** `repo init`、`repo sync`、`git clone` OpenHarmony 整仓。XTS 叶子编译不需要整仓；门禁的 `build.py` 链路本地也跑不起来。
+- **禁止** 运行 `build/prebuilts_download.sh` / `prebuilts_download.py`。它会拉全部 prebuilts（数 GB～数十 GB），而且**不包含**静态 hvigor。
+- **下载预算**：单次下载 > 200 MB 必须先停下来问用户；只允许下载本 skill 明确列出的包（node 18.20.1、command-line-tools 26.0.1.290、`7.26.0-arkts1.2` 静态包、SDK）。
+- 缺工具时**报告缺什么、给出官方下载地址**，然后停下；不要“顺手”把整仓拉下来。
+- 只按 `references/windows-gate-build.md` 的叶子 hvigor 命令编译。违反以上任一条视为任务失败，**“为了和门禁一致”不是理由**。
+
+先跑 `scripts/preflight.sh` 检查四件套，缺什么补什么，不要整仓。
+
 ## 先选路线
 
 | 目标 | 路线 | 说明 |
@@ -33,7 +43,7 @@ description: Use when building OpenHarmony XTS test suites on a Windows host thr
    wsl -l -v
    wsl -d Ubuntu -e bash -lc "uname -a && df -h /"
    ```
-2. 在 WSL 内准备四样东西（优先用本地已有包，不强制联网）：
+2. 在 WSL 内先跑 `scripts/preflight.sh`（只检查不下载），再准备四样东西（优先用本地已有包，不强制联网）：
    - `node-v18.20.1-linux-x64`（门禁 node 版本）
    - `command-line-tools 26.0.1.290`（动态门禁同款 hvigor 6.26.21）
    - 静态：`command-line-tools` `7.26.0-arkts1.2-0601-02`，解压到 `.../7.26.0.static/hvigor`（与门禁 `prebuilts/hvigor/7.26.0.static/hvigor` 布局一致）
@@ -154,12 +164,16 @@ xts-gate-windows/
     run-gate-build.sh          # WSL 内门禁编译
     run-gate-build.ps1         # Windows 侧调用 WSL 的包装
     fetch-static-toolchain.sh  # 自动选镜像最新 7.26* 并解压（WSL 内，--list 可查）
+    preflight.sh               # 四件套自检（只检查，不下载）
   templates/
     BUILD.gn.dynamic / BUILD.gn.static
     Test.json
     module.json5.snippet
     local.properties.example
     hvigor-config.json5.example
+    CLAUDE.md.snippet                  # 整仓下载禁令，复制到项目/全局 CLAUDE.md
+    block-full-repo-download.js        # PreToolUse hook：拦截 repo sync / prebuilts_download
+    claude-settings.hooks.json.example # hook 接线示例
 ```
 
 ## 验证状态

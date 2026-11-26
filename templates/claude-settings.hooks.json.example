@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(repo init:*)",
+      "Bash(repo sync:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/<you>/.claude/skills/xts-gate-windows/templates/block-full-repo-download.js\""
+          }
+        ]
+      }
+    ]
+  }
+}

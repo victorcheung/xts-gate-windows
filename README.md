@@ -75,10 +75,14 @@ scripts/
   run-gate-build.sh          WSL 内编译
   run-gate-build.ps1         Windows 调用 WSL
   fetch-static-toolchain.sh  自动选镜像最新 7.26* 并下载/解压（--list 查看候选）
+  preflight.sh               四件套自检（只检查，不下载）
 templates/
   BUILD.gn.dynamic / BUILD.gn.static
   Test.json / module.json5.snippet
   local.properties.example / hvigor-config.json5.example
+  CLAUDE.md.snippet                 整仓下载禁令（复制到项目/全局 CLAUDE.md）
+  block-full-repo-download.js       PreToolUse hook，拦截 repo sync / prebuilts_download
+  claude-settings.hooks.json.example
 ```
 
 ## 验证状态

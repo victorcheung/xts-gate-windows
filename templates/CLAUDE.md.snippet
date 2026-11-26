@@ -1,0 +1,8 @@
+# XTS 编译硬性规则（复制到项目或全局 CLAUDE.md）
+
+- 禁止 `repo init`、`repo sync`、`git clone` OpenHarmony 整仓。
+- 禁止运行 `build/prebuilts_download.sh` / `prebuilts_download.py`。
+- 单次下载超过 200 MB 必须先停下来问用户。
+- XTS 只按 skill `xts-gate-windows` 的 WSL 叶子 hvigor 命令编译（见 `references/windows-gate-build.md`）。
+- 缺工具时报告缺什么和官方下载地址，然后停下；不要自行下载整仓。
+- “为了和门禁一致”不构成下载整仓的理由。

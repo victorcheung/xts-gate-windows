@@ -1,6 +1,6 @@
 {
   "name": "xts-gate-windows",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Claude Code skill for OpenHarmony XTS gate builds on a Windows host via WSL with the Linux gate toolchain, plus XTS pre-submit checks (acts/HITS, BUILD.gn, Test.json, syscap, binaries).",
   "license": "Apache-2.0",
   "bin": {
